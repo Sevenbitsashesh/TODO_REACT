@@ -2,27 +2,27 @@ import React from 'react';
 
 import {connect} from 'react-redux';
 import  {todos}  from '../actions';
-const Todos = (props) => {
-console.log(props.list.Todos)
+const MyTodos = (props) => {
+// console.log(props.list.Todos)
     const addTodo = (event, props) => {
         event.preventDefault();
         props.addtodo(event.target.user.value)
         
       }
     const deletetodo = (event, item)  => {
-        console.log(props);
+        // console.log(props);
         event.preventDefault();
         props.deletetodo(item)
-    }
+    };
+    const todos = props.list;
+    // console.log(todos);
 return (<div>
     {/* deletetodo */}
-    <div>
-   
+    <div>   
         {   
+            todos.length > 0 ? 
             
-            props.list && props.list.Todos &&  props.list.Todos.length >= 1 ? 
-            
-            props.list.Todos.map(d => 
+            todos.map(d => 
         <div key={d.id} onClick={(event) => deletetodo(event, d)}>{d.text}</div>
         ) :
         <div>
@@ -40,15 +40,15 @@ return (<div>
 }
 
 const mapStateToProps = (state) => {
-console.log(state)        
+// console.log(state)        
    return (
     
-    {list: state.Todos}
+    {list: state.todos.todos}
 )
 }
 
 // const mapDispatchToProps = (actions) => ({
 //   todos: actions
 // })
-const TodoApp = connect(mapStateToProps, todos)(Todos)
+const TodoApp = connect(mapStateToProps, todos)(MyTodos)
 export default TodoApp;

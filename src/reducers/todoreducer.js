@@ -1,23 +1,25 @@
-const Initial_State = {todos: [] };
-export const Todos = (state = Initial_State, action) => {
+const Initial_State = {todos: []};
+export  function todos(state = Initial_State, action)  {
     
     switch(action.type) {
 
         case 'ADD_TODO' :  
-        console.log(state)      
-         return {...state.todos,  todos: {id: action.id, text: action.text}};
+        // console.log('adding',action);
+         return Object.assign({}, state, {todos:[ ...state.todos,{id: action.id, text: action.text}]}) ;
+         
 
-         case 'LIST_TODOS' :        
-         return state.todos;
+         case 'LIST_TODOS' :   
+              
+         return [...state.todos];
 
          case 'DELETE_TODO' :
+        console.log(state.todos.indexOf(action.item));
+        state.todos.slice(state.todos.indexOf(action.item)-1,1)
+        return state
         
-        return [state]
-        //  return [ ...state.slice(state.indexOf(action.item)+1,1)];
-
-
          default :
-         return [state.todos]
+        //  console.log('default');      
+         return state
     }
     
 }
