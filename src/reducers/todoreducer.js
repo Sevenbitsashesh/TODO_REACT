@@ -5,20 +5,22 @@ export  function todos(state = Initial_State, action)  {
 
         case 'ADD_TODO' :  
         // console.log('adding',action);
-         return Object.assign({}, state, {todos:[ ...state.todos,{id: action.id, text: action.text}]}) ;
+         return  Object.assign({}, state, {todos:[ ...state.todos,{id: action.id, text: action.text}]});
          
 
          case 'LIST_TODOS' :   
-              
-         return [...state.todos];
+              console.log(todos)
+         return state;
 
          case 'DELETE_TODO' :
-        console.log(state.todos.indexOf(action.item));
-        state.todos.slice(state.todos.indexOf(action.item)-1,1)
-        return state
+        console.log(state.todos.splice(state.todos.indexOf(action.item),1));
+        console.log(state)
+        
+        
+        return Object.assign({}, state, {todos:state.todos.filter((d) => { return d.id !== action.item.id })});
         
          default :
-        //  console.log('default');      
+         console.log('default');      
          return state
     }
     
